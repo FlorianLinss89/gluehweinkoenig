@@ -1,1 +1,2 @@
+# Glühweinkönig
 Eingabe von Server, Datenbank, Admin und Passwort erfolgt in /php/connect.php

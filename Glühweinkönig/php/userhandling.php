@@ -1,40 +1,30 @@
 <?php
 
 include("connect.php");
-$groupTableName = "group_table";
-$userTableName = "userbase";
 $responseStatus = '200 OK';
 $responseText = 'nothing';
 
-if(isset($_GET['action']) && $_GET['action'] == 'fetch_grouplist'){
-    fetch_grouplist($con, $groupTableName);
-}
-elseif(isset($_GET['action']) && $_GET['action'] == 'fetch_userlist') {
-    fetch_userlist($con, $userTableName);
+if (isset($_GET['action']) && $_GET['action'] == 'fetch_grouplist') {
+    fetch_grouplist($con);
+} else if (isset($_GET['action']) && $_GET['action'] == 'fetch_userlist') {
+    fetch_userlist($con);
 }
 
-function fetch_grouplist($db, $table) {
-    if(empty($db)) {
+function fetch_grouplist($db)
+{
+    if (empty($db)) {
         $msg = "Database connection error";
-    }
-    elseif(empty($table)) {
-        $msg = "group_table name is empty";
-    }
-
-    else {
-        $result = true;
-        $sql = "SELECT * FROM ".$table;
+    } else {
+        $sql = "SELECT * FROM group_table";
         $result = $db->query($sql);
-        if($result == true) { 
+        if ($result) {
             if ($result->num_rows > 0) {
                 $row = mysqli_fetch_all($result, MYSQLI_ASSOC);
                 $msg = json_encode($row);
-            } 
-            else {
+            } else {
                 $msg = "No Data Found";
             }
-        }
-        else {
+        } else {
             $msg = mysqli_error($db);
         }
     }
@@ -42,32 +32,27 @@ function fetch_grouplist($db, $table) {
 }
 
 
-function fetch_userlist($db, $table) {
+function fetch_userlist($db)
+{
 
-    if(empty($db)) {
+    if (empty($db)) {
         $msg = "Database connection error";
-    }
-    elseif(empty($table)) {
-        $msg = "user_table name is empty";
-    }
-
-    else {
+    } else {
         $result = true;
-        $sql = "SELECT * FROM ".$table;
+        $sql = "SELECT * FROM userbase";
         $result = $db->query($sql);
-        if($result == true) { 
+        if ($result) {
             if ($result->num_rows > 0) {
                 $row = mysqli_fetch_all($result, MYSQLI_ASSOC);
                 $msg = json_encode($row);
-            } 
-            else {
+            } else {
                 $msg = "No Data Found";
             }
-        }
-        else {
+        } else {
             $msg = mysqli_error($db);
         }
     }
     echo $msg;
 }
+
 ?>

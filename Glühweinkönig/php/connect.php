@@ -1,7 +1,5 @@
 <?php
-  $con=mysqli_connect("server","admin","adminpasswort","gluehweinkoenig");
-  if(!$con)
-  {
+$con = mysqli_connect("localhost", "root", "test", "gluehweinkoenig");
+if (!$con) {
     die("cannot connect to server");
-  }    
-?>
+}
