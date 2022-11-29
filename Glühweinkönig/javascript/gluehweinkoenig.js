@@ -149,11 +149,7 @@ function fillTeams(amount, groups) {
         j++;
         if(j == 3) j=0;
     }
-    
-    team1 = shuffle(team1);
-    team2 = shuffle(team2);
-    team3 = shuffle(team3);
-
+   
     var teamTable = "<table id='team_table'>\n" +
                     "   <caption><strong>Teams</strong></caption>\n" +
                     "   <thead>\n" +
