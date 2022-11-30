@@ -27,8 +27,8 @@ function submit(data){
 }
 
 function init() {
-    fetchData(groups, ["Vereine nicht gefunden"], "GET","../php/userhandling.php?action=fetch_grouplist");
-    fetchData(users, "Keine Nutzer gefunden.", "GET","../php/userhandling.php?action=fetch_userlist");
+    fetchData("groups", ["Vereine nicht gefunden"], "GET","../php/userhandling.php?action=fetch_grouplist");
+    fetchData("users", "Keine Nutzer gefunden.", "GET","../php/userhandling.php?action=fetch_userlist");
     buttonSetupt();
 }
 
@@ -60,7 +60,7 @@ function transformData(data) {
 }
 
 function result(resultType, data) {
-    if(resultType == groups) {
+    if(resultType == "groups") {
         groupResult(data);
     }
     else {
