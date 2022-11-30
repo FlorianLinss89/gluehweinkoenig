@@ -31,8 +31,6 @@ function loginAttempt($data, $db, $table) {
     else{
        $msg="Anmeldung fehlgeschlagen";
     }
-
-    $msg = "Login Attempted";
     echo $msg;
 }
 

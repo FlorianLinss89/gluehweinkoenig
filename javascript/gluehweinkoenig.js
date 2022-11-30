@@ -1,3 +1,5 @@
+var userbase ="";
+
 var form = document.querySelector('form');
 form.addEventListener('submit', function (event) {
    event.preventDefault();
@@ -5,12 +7,47 @@ form.addEventListener('submit', function (event) {
    submit(data);
 });
 
-var userbase ="";
+function submit(data){
+
+    var request = new XMLHttpRequest();
+    request.onreadystatechange = function() {
+        if (this.readyState === 4) {
+            if(this.status === 200) {
+
+                console.log(this.responseText);
+                init();
+            } 
+            else {
+                failure("Leider ist ein Fehler aufgetreten. Bitte versuchen sie es erneut.");
+            }
+        }
+    }
+    request.open("POST","../php/userlogin.php");
+    request.send(data);
+}
 
 function init() {
-    fetchgroups();
-    fetchUsers();
+    fetchData(groups, ["Vereine nicht gefunden"], "GET","../php/userhandling.php?action=fetch_grouplist");
+    fetchData(users, "Keine Nutzer gefunden.", "GET","../php/userhandling.php?action=fetch_userlist");
     buttonSetupt();
+}
+
+function fetchData(resultType, failString, requestString) {
+
+    var request = new XMLHttpRequest();
+    request.onreadystatechange = function() {
+        if (this.readyState === 4) {
+            if(this.status === 200) {
+                var list = transformData(this.responseText);
+                result(list, resultType);
+            }
+            else {
+                result(failString, resultType);
+            }
+        } 
+    }
+    request.open(requestString);
+    request.send();
 }
 
 function transformData(data) {
@@ -22,74 +59,35 @@ function transformData(data) {
     }
 }
 
-function fetchgroups() {
-
-    var request = new XMLHttpRequest();
-    request.onreadystatechange = function() {
-        if (this.readyState === 4 && this.status === 200) {
-            var groupList = (this.responseText);
-            groupsuccess(transformData(groupList));
-        } else {
-            groupfailure();
-        }
+function result(resultType, data) {
+    if(resultType == groups) {
+        groupResult(data);
     }
-    request.open("GET","../php/userhandling.php?action=fetch_grouplist");
-    request.send();
-}
-
-function fetchUsers() {
-
-    var request = new XMLHttpRequest();
-    request.onreadystatechange = function() {
-        if (this.readyState === 4 && this.status === 200) {
-            var userList = (this.responseText);
-            usersuccess(transformData(userList));
-        } else {
-            failure("Keine Nutzer gefunden.");
-        }
+    else {
+        userResult(data);
     }
-    
-    request.open("GET","../php/userhandling.php?action=fetch_userlist");
-    request.send();
 }
 
-function buttonSetupt() {
-    $('#team_creator').click(function(event) {
-        teamCreator();
-    });
-}
+function userResult(users) {
 
-function submit(data){
-
-    var request = new XMLHttpRequest();
-    request.onreadystatechange = function() {
-        if (this.readyState === 4 && this.status === 200) {
-            console.log(this.responseText);
-            init();
-        } else {
-            failure("Leider ist ein Fehler aufgetreten. Bitte versuchen sie es erneut.");
-        }
-    }
-    request.open("POST","../php/userlogin.php");
-    request.send(data);
-}
-
-function usersuccess(users) {
-    
     var userList = "";
-    userbase = users;
-    for(var x=users.length-1; x>-1; x--) {
-        var row = users[x];
-        userList +=  "<p><span>" + row['user_index'] + " " + row['user_name'] + " " + row['user_group'] + "</span></p>\n";
+
+    if(!users.isArray()) {
+        userList = users;
     }
+
+    else {
+        userbase = users;
+        for(var x=users.length-1; x>-1; x--) {
+            var row = users[x];
+            userList +=  "<p><span>" + row['user_index'] + " " + row['user_name'] + " " + row['user_group'] + "</span></p>\n";
+        }
+    }
+
     $('#active_users').html(userList);
 }
 
-function failure(msg) {
-    document.getElementById('active_users').innerHTML = msg;
-}
-
-function groupsuccess(groups) {
+function groupResult(groups) {
 
     var groupSelector =   "   <label for display_selection><b>Anzeige:</b><label>\n" + 
                             "   <select id='year_selection' onchange='displaySwap(this.value)'>\n";
@@ -100,42 +98,13 @@ function groupsuccess(groups) {
     $('#group_selector').html(groupSelector);
 }
 
-function groupfailure() {
-
-    var groups = ["Herbert","Petra"];
-
-    var groupSelector =   "   <label for display_selection><b>Anzeige:</b><label>\n" + 
-                            "   <select id='year_selection' onchange='displaySwap(this.value)'>\n";
-    for(var x of groups) {
-        groupSelector +=  "       <option>" + x + "</option>\n";
-    }
-    groupSelector +=      "   </select>\n";
-    $('#group_selector').html(groupSelector);
+function buttonSetupt() {
+    $('#team_creator').click(function(event) {
+        fillTeams();
+    });
 }
 
-function teamCreator() {
-
-    var groupAmount = 1;
-    var check = [];
-
-    try {
-        check[0] = userbase[0]['user_group'];
-        for(var i of userbase) {
-            if(!(check.indexOf(i['user_group'])>-1)) {
-                check.push(i['user_group']);
-                groupAmount++;
-            }
-        }
-
-        fillTeams(groupAmount,check);
-    }
-
-    catch(e) {
-        fillTeams(0,check);
-    }
-}
-
-function fillTeams(amount, groups) {
+function fillTeams() {
 
     var teambase = shuffle(userbase);
     var team1 = [];
