@@ -27,8 +27,8 @@ function submit(data){
 }
 
 function init() {
-    fetchData("groups", ["Vereine nicht gefunden"], "GET","../php/userhandling.php?action=fetch_grouplist");
-    fetchData("users", "Keine Nutzer gefunden.", "GET","../php/userhandling.php?action=fetch_userlist");
+    fetchData("groups", ["Vereine nicht gefunden"]);
+    fetchData("users", "Keine Nutzer gefunden.");
     buttonSetupt();
 }
 
@@ -46,7 +46,8 @@ function fetchData(resultType, failString, requestString) {
             }
         } 
     }
-    request.open(requestString);
+    if(resultType == "groups") request.open("GET","../php/userhandling.php?action=fetch_grouplist");
+    else request.open("GET","../php/userhandling.php?action=fetch_userlist");
     request.send();
 }
 
@@ -59,7 +60,7 @@ function transformData(data) {
     }
 }
 
-function result(resultType, data) {
+function result(data, resultType) {
     if(resultType == "groups") {
         groupResult(data);
     }
@@ -72,7 +73,7 @@ function userResult(users) {
 
     var userList = "";
 
-    if(!users.isArray()) {
+    if(!Array.isArray(users)) {
         userList = users;
     }
 
@@ -89,12 +90,12 @@ function userResult(users) {
 
 function groupResult(groups) {
 
-    var groupSelector =   "   <label for display_selection><b>Anzeige:</b><label>\n" + 
+    var groupSelector =     "   <label for display_selection><b>Anzeige:</b><label>\n" + 
                             "   <select id='year_selection' onchange='displaySwap(this.value)'>\n";
     for(var x of groups) {
-        groupSelector +=  "       <option>" + x['group_name'] + "</option>\n";
+        groupSelector +=    "       <option>" + x['group_name'] + "</option>\n";
     }
-    groupSelector +=      "   </select>\n";
+    groupSelector +=        "   </select>\n";
     $('#group_selector').html(groupSelector);
 }
 
