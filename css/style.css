@@ -13,23 +13,13 @@ body {
 }
 
 .subheader {
-	text-align: center;
-	margin: 0 -65px 45px -65px;
-	height: 200px;
 	border-bottom: 1px solid #e8ebed;
-}
-
-.subheader#quote {
-	background: #fff url(../image/header.png) no-repeat center center;
-	background-size: auto 80%;
+	margin: 0 -65px 45px -65px;
+	text-align: center;
+	width: 50%;
 }
 
 .qr_code {
-	float: right;
-}
-
-img {
-	width: 25%;
 	float: right;
 }
 
@@ -71,11 +61,6 @@ a {
 	-webkit-transition: all 0.2s ease;
 	transition: all 0.2s ease;
 	outline: 0;
-}
-
-.subheader#quote {
-	background: #fff url(../images/header.png) no-repeat center center;
-	background-size: auto 80%;
 }
 
 .wrapper_in {
