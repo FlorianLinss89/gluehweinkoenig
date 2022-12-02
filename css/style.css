@@ -81,7 +81,7 @@ a {
 
 .active_users {
 	display: grid;
-	grid-template-columns: repeat(2, 1fr);
+	grid-template-columns: repeat(4, 1fr);
 	border-collapse: collapse;
 }
 
@@ -146,7 +146,7 @@ select.group_selector option {
     margin-top: calc(var(--bs-gutter-y)*-1);
 }
 
-.loginBlock {
+#loginBlock {
     display: block;
     padding: 1%;
 }

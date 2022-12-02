@@ -100,9 +100,18 @@ function groupResult(groups) {
 }
 
 function buttonSetupt() {
-    $('#team_creator').click(function(event) {
-        fillTeams();
-    });
+    var url = window.location.href;
+    if(!url.includes("?admin")) {
+        $('.team_display').remove();
+        $('#loginBlock').removeClass("loginBlock");
+        $('#loginBlock').html($('#loginBlock').html());
+    }
+    else {
+
+        $('#team_creator').click(function(event) {
+            fillTeams();
+        });
+    }
 }
 
 function fillTeams() {
