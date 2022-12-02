@@ -22,7 +22,7 @@ function submit(data){
             }
         }
     }
-    request.open("POST","../php/userlogin.php");
+    request.open("POST","http://localhost/php/userlogin.php");
     request.send(data);
 }
 
@@ -46,8 +46,8 @@ function fetchData(resultType, failString, requestString) {
             }
         } 
     }
-    if(resultType == "groups") request.open("GET","../php/userhandling.php?action=fetch_grouplist");
-    else request.open("GET","../php/userhandling.php?action=fetch_userlist");
+    if(resultType == "groups") request.open("GET","http://localhost/php/userhandling.php?action=fetch_grouplist");
+    else request.open("GET","http://localhost/php/userhandling.php?action=fetch_userlist");
     request.send();
 }
 
