@@ -9,11 +9,7 @@ if(!isset($_POST['user_name'])) {
     $msg = 'Anfrage enthält keinen Nutzernamen';
     echo $msg;
 } else {
-    $validatePattern = '/^[a-zA-Z0-9\s]{4,20}$/';
-    if(!preg_match($validatePattern,$_POST['user_name'])) {
-       $msg = 'Nutzername entspricht nicht den Vorgaben. Der Benutzername muss aus kleinen Buchstaben(a-z) und/oder Ziffern(0-9) bestehen und 4-20 Zeichen lang sein';
-       echo $msg;
-    } else loginAttempt($_POST, $con, $tablename);
+    loginAttempt($_POST, $con, $tablename);
 }
 
 function loginAttempt($data, $db, $table) {
@@ -31,8 +27,6 @@ function loginAttempt($data, $db, $table) {
     else{
        $msg="Anmeldung fehlgeschlagen";
     }
-
-    $msg = "Login Attempted";
     echo $msg;
 }
 
