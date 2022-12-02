@@ -3,23 +3,30 @@
     <head>
         <meta charset="UTF-8">
         <title>Anmeldung für den Glühweinkönig</title>
-        <script src="../javascript/gluehweinkoenig.js" defer></script>
-        <script src="../javascript/jquery-3.6.1.js"></script>
-        <link rel="stylesheet" href="../css/style.css">
+        <script src="javascript/gluehweinkoenig.js" defer></script>
+        <script src="javascript/jquery-3.6.1.js"></script>
+        <link rel="stylesheet" href="css/style.css">
+        <script>
+            function submitForm() {
+                event.preventDefault();
+                var data = new FormData(document.getElementById('loginForm'));
+                submit(data);
+            }
+        </script>
     </head>
     <body onload="init()">
         <div class="wrapper_in">
             <div class='header' id='title'>
-                <img src="../images/header.png" alt="title">
+                <img src="images/header.png" alt="title">
             </div>
             <div class='subheader' id='quote'>
-                <img src="../images/qr_code_anmeldung.png" alt="qr_code_anmeldung">
+                <img src="images/qr_code_anmeldung.png" alt="qr_code_anmeldung">
             </div>
             <main class='main_box'>
                 <div id='loginBlock' class="loginBlock" >
                     <h2 class='header_text'>Willkommen beim Glühweinkönig</h2>
                     <p class='lead'>Bitte einen Namen eingeben und einen Verein auswählen.<p>
-                    <form method="post" action="userlogin.php" id="loginForm">
+                    <form method="post" id="loginForm" onsubmit="submitForm()">
                         <label for="user_name"><b> Name: </b></label>
                         <input name="user_name" id="user_name" type="text">
                         <label for="group_selector"><b> Verein: </b></label>
