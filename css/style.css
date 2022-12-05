@@ -13,15 +13,14 @@ body {
 }
 
 .subheader {
-	text-align: center;
-	margin: 0 -65px 45px -65px;
-	height: 200px;
 	border-bottom: 1px solid #e8ebed;
+	margin: 0 -65px 45px -65px;
+	text-align: center;
+	width: 50%;
 }
 
-.subheader#quote {
-	background: #fff url(../image/header.png) no-repeat center center;
-	background-size: auto 80%;
+.qr_code {
+	float: right;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -62,11 +61,6 @@ a {
 	-webkit-transition: all 0.2s ease;
 	transition: all 0.2s ease;
 	outline: 0;
-}
-
-.subheader#quote {
-	background: #fff url(../images/header.png) no-repeat center center;
-	background-size: auto 80%;
 }
 
 .wrapper_in {
