@@ -116,14 +116,14 @@ button.create {
 	margin-left: 1%;
 }
 
-select.group_selector {
+#group_selector {
 	list-style: none;
 	margin: 0 0 25px 0;
 	padding: 0;
 	line-height: 1.3;
 }
 
-select.group_selector option {
+#group_selector option {
 	position: relative;
 	padding-left: 30px;
 	margin-bottom: 20px;
