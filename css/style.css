@@ -194,3 +194,53 @@ th {
         width: 50%;
     }
 }
+
+@media only screen and (max-device-width: 820px) {
+	.subheader#quote {
+		background-size: auto 150%;
+	}
+
+	.header_text {
+		font-size: 60px;
+	}
+
+	.form-group {
+		display: block;
+	}
+
+	label, input, select {
+		font-size: 40px;
+	}
+
+	input, select {
+		width: 100%;
+		padding: 25px !important;
+	}
+
+	.lead {
+		font-size: 30px !important;
+	}
+
+	.submit {
+		font-size: 40px !important;
+		width: 100%;
+		padding: 25px !important;
+	}
+
+	.main_box {
+		position: relative;
+		display: block;
+		margin-top: 30px !important;
+	}
+
+	.active_users {
+		margin-top: 4em;
+		grid-template-columns: repeat(1, 1fr);
+	}
+	.active_users p {
+		margin-right: 30px;
+	}
+	.active_users p span {
+		font-size: 35px;
+	}
+}
