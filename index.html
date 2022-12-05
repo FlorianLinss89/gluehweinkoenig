@@ -16,22 +16,25 @@
     </head>
     <body onload="init()">
         <div class="wrapper_in">
-            <div class='header' id='title'>
+            <div class="header" id="title">
                 <img src="images/header.png" alt="title">
             </div>
-            <div class='subheader' id='quote'>
+            <div class="subheader" id="quote">
                 <img src="images/qr_code_anmeldung.png" alt="qr_code_anmeldung">
             </div>
-            <main class='main_box'>
-                <div id='loginBlock' class="loginBlock" >
+            <main class="main_box">
+                <div id="loginBlock" class="loginBlock" >
                     <h2 class='header_text'>Willkommen beim Glühweinkönig</h2>
                     <p class='lead'>Bitte einen Namen eingeben und einen Verein auswählen.<p>
                     <form method="post" id="loginForm" onsubmit="submitForm()">
-                        <label for="user_name"><b> Name: </b></label>
-                        <input name="user_name" id="user_name" type="text">
-                        <label for="group_selector"><b> Verein: </b></label>
-                        <select class='group_selector' name="group_selector" id="group_selector" type="text">
-                        </select>
+                        <div class="form-group">
+                            <label for="user_name"><b> Name: </b></label>
+                            <input name="user_name" id="user_name" type="text">
+                        </div>
+                        <div class="form-group">
+                            <label for="group_selector"><b> Verein: </b></label>
+                            <select name="group_selector" id="group_selector"></select>
+                        </div>
                         <button class="submit" type="submit">Anmelden</button>
                     </form>
                     <div id="active_users" class="active_users"></div>
